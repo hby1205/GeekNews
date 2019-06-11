@@ -84,6 +84,7 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // 点击的时候，选中
                 item.setChecked(true);
+
                 switch (item.getItemId()) {
                     case R.id.zhihu:
                         FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ZHIHU).getClass(), R.id.fram);
@@ -111,7 +112,7 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.collect:
 
-//                        switchTitleAndFragment(TYPE_COLLECT);
+//                        switchTitleAndFra888gment(TYPE_COLLECT);
                         break;
                     case R.id.setting:
                         FragmentUtils.addFragment(mManager, mFragments.get(TYPE_SETTING).getClass(), R.id.fram);
