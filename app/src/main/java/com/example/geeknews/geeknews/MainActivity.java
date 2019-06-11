@@ -22,6 +22,7 @@ import com.example.geeknews.geeknews.fragments.SettingFragment;
 import com.example.geeknews.geeknews.fragments.VtexFragment;
 import com.example.geeknews.geeknews.fragments.WeChatFragment;
 import com.example.geeknews.geeknews.fragments.ZhiHuFragment;
+import com.example.geeknews.geeknews.utils.FragmentUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class MainActivity extends BaseActivity {
 
         mManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.add(R.id.fram,mFragments.get(mLastType));
+        fragmentTransaction.add(R.id.fram, mFragments.get(mLastType));
         fragmentTransaction.commit();
     }
 
@@ -85,28 +86,42 @@ public class MainActivity extends BaseActivity {
                 item.setChecked(true);
                 switch (item.getItemId()) {
                     case R.id.zhihu:
-                        switchTitleAndFragment(TYPE_ZHIHU);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ZHIHU).getClass(), R.id.fram);
+//                        switchTitleAndFragment(TYPE_ZHIHU);
                         break;
                     case R.id.wechat:
-                        switchTitleAndFragment(TYPE_WECHAT);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_WECHAT).getClass(), R.id.fram);
+
+//                        switchTitleAndFragment(TYPE_WECHAT);
                         break;
                     case R.id.gank:
-                        switchTitleAndFragment(TYPE_GANK);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_GANK).getClass(), R.id.fram);
+
+//                        switchTitleAndFragment(TYPE_GANK);
                         break;
                     case R.id.gold:
-                        switchTitleAndFragment(TYPE_GOLD);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_GOLD).getClass(), R.id.fram);
+
+//                        switchTitleAndFragment(TYPE_GOLD);
                         break;
                     case R.id.vtex:
-                        switchTitleAndFragment(TYPE_VTEX);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_VTEX).getClass(), R.id.fram);
+
+//                        switchTitleAndFragment(TYPE_VTEX);
                         break;
                     case R.id.collect:
-                        switchTitleAndFragment(TYPE_COLLECT);
+
+//                        switchTitleAndFragment(TYPE_COLLECT);
                         break;
                     case R.id.setting:
-                        switchTitleAndFragment(TYPE_SETTING);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_SETTING).getClass(), R.id.fram);
+
+//                        switchTitleAndFragment(TYPE_SETTING);
                         break;
                     case R.id.about:
-                        switchTitleAndFragment(TYPE_ABOUT);
+                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ABOUT).getClass(), R.id.fram);
+
+//                        switchTitleAndFragment(TYPE_ABOUT);
                         break;
                 }
                 draw.closeDrawer(Gravity.LEFT);
