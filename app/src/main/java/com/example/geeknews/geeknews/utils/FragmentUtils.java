@@ -26,9 +26,8 @@ public class FragmentUtils {
         if (fragment == null) {
             try {
                 fragment = mClass.newInstance();
-                fragment.setArguments(bundle);
-
                 transaction.add(layoutId, fragment, tag);
+                fragment.setArguments(bundle);
                 hideOtherFragment(manager, transaction, fragment);
                 if (isNeedToBackStack) {
                     transaction.addToBackStack(tag);
@@ -44,18 +43,23 @@ public class FragmentUtils {
             if (fragment.isAdded()) {
 
                 if (fragment.isHidden()) {
-                    fragment.setArguments(bundle);
                     transaction.show(fragment);
+                    fragment.setArguments(bundle);
                     hideOtherFragment(manager, transaction, fragment);
+                    if (isNeedToBackStack) {
+                        transaction.addToBackStack(tag);
+                    }
                 }
 
 
 
             } else {
-                fragment.setArguments(bundle);
-
                 transaction.add(layoutId, fragment, tag);
+                fragment.setArguments(bundle);
                 hideOtherFragment(manager, transaction, fragment);
+                if (isNeedToBackStack) {
+                    transaction.addToBackStack(tag);
+                }
             }
         }
         transaction.commit();

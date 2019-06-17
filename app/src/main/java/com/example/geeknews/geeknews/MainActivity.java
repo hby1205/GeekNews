@@ -19,6 +19,8 @@ import com.example.geeknews.geeknews.fragments.AboutFragment;
 import com.example.geeknews.geeknews.fragments.CollectFragment;
 import com.example.geeknews.geeknews.fragments.GankFragment;
 import com.example.geeknews.geeknews.fragments.GoldFragment;
+import com.example.geeknews.geeknews.fragments.SearchFragment;
+import com.example.geeknews.geeknews.fragments.SearchWxFragment;
 import com.example.geeknews.geeknews.fragments.SettingFragment;
 import com.example.geeknews.geeknews.fragments.VtexFragment;
 import com.example.geeknews.geeknews.fragments.WeChatFragment;
@@ -77,9 +79,8 @@ public class MainActivity extends BaseActivity {
         actionBarDrawerToggle.syncState();
 
         mManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.add(R.id.fram, mFragments.get(mLastType));
-        fragmentTransaction.commit();
+        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ZHIHU).getClass(), R.id.fram);
+        naShow.setCheckedItem(R.id.zhihu);
     }
 
     @Override
@@ -128,10 +129,43 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("a", query);
+                if (mLastType == TYPE_WECHAT) {
+
+                    FragmentUtils.addFragment(mManager, SearchWxFragment.class, R.id.fram, bundle, true);
+                } else {
+                    FragmentUtils.addFragment(mManager, SearchFragment.class, R.id.fram, bundle, true);
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
+        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+                mManager.popBackStack();
+            }
+        });
     }
 
     private void switchTitleAndFragment(int type) {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
+       /* FragmentTransaction fragmentTransaction = mManager.beginTransaction();
 
         Fragment fragment = mFragments.get(type);
         if (!fragment.isAdded()) {
@@ -143,7 +177,9 @@ public class MainActivity extends BaseActivity {
 
         fragmentTransaction.commit();
 
+        mLastType = type;*/
         mLastType = type;
+        FragmentUtils.addFragment(mManager, mFragments.get(type).getClass(), R.id.fram);
 
         if (type == TYPE_WECHAT || type == TYPE_GANK) {
             mItem.setVisible(true);
@@ -185,5 +221,14 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new CollectFragment());
         mFragments.add(new SettingFragment());
         mFragments.add(new AboutFragment());
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mSearchView.isSearchOpen()) {
+            mSearchView.closeSearch();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

@@ -9,7 +9,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        ToastUtil.showShort(e.getMessage());
+//        ToastUtil.showShort(e.getMessage());
     }
 
     @Override
