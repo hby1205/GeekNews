@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.geeknews.geeknews"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -71,7 +71,8 @@ dependencies {
 
     implementation 'org.greenrobot:greendao:3.2.2' // add library  数据库
     implementation 'org.greenrobot:greendao-generator:3.2.2'  //
-
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0'
+    implementation 'com.github.qdxxxx:StickyHeaderDecoration:1.0.1'
 }
 //冲突配置
 configurations.all {

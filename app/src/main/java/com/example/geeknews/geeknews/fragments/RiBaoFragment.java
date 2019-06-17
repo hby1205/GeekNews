@@ -21,6 +21,7 @@ import com.example.geeknews.geeknews.view.RiBaoView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import qdx.stickyheaderdecoration.NormalDecoration;
 
 public class RiBaoFragment extends BaseMvpFragment<RiBaoModel,RiBaoView,RiBaoPresenter> implements RiBaoView {
     @BindView(R.id.xcl)
@@ -53,9 +54,31 @@ public class RiBaoFragment extends BaseMvpFragment<RiBaoModel,RiBaoView,RiBaoPre
     protected void initView() {
         xcl.setLayoutManager(new LinearLayoutManager(getActivity()));
         xcl.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+
+      /*  NormalDecoration  normalDecoration = new NormalDecoration() {
+            @Override
+            public String getHeaderName(int i) {
+                return null;
+            }
+        };
+        xcl.addItemDecoration(normalDecoration);
+
+        // 自定义
+        normalDecoration.setOnDecorationHeadDraw(new NormalDecoration.OnDecorationHeadDraw() {
+            @Override
+            public View getHeaderView(int i) {
+                return null;
+            }
+        });
+        // 头部监听
+        normalDecoration.setOnHeaderClickListener(new NormalDecoration.OnHeaderClickListener() {
+            @Override
+            public void headerClick(int i) {
+
+            }
+        });*/
         mXclMyAdapter = new XclMyAdapter(getActivity());
         xcl.setAdapter(mXclMyAdapter);
-
     }
 
     @Override

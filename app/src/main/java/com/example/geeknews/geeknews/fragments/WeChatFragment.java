@@ -7,6 +7,5 @@ public class WeChatFragment extends BaseFragment {
     @Override
     protected int getLaoutId() {
         return R.layout.fragment_wechat;
-
     }
 }

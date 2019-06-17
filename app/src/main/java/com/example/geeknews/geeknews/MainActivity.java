@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -23,6 +24,7 @@ import com.example.geeknews.geeknews.fragments.VtexFragment;
 import com.example.geeknews.geeknews.fragments.WeChatFragment;
 import com.example.geeknews.geeknews.fragments.ZhiHuFragment;
 import com.example.geeknews.geeknews.utils.FragmentUtils;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,10 +52,13 @@ public class MainActivity extends BaseActivity {
     NavigationView naShow;
     @BindView(R.id.draw)
     DrawerLayout draw;
+    @BindView(R.id.searcgview)
+    MaterialSearchView mSearchView;
     private List<Integer> mTitles;
     private ArrayList<Fragment> mFragments;
     private FragmentManager mManager;
     private int mLastType = 0;
+    private MenuItem mItem;
 
     @Override
     protected int getLayoutId() {
@@ -87,42 +92,36 @@ public class MainActivity extends BaseActivity {
 
                 switch (item.getItemId()) {
                     case R.id.zhihu:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ZHIHU).getClass(), R.id.fram);
-//                        switchTitleAndFragment(TYPE_ZHIHU);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ZHIHU).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_ZHIHU);
                         break;
                     case R.id.wechat:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_WECHAT).getClass(), R.id.fram);
-
-//                        switchTitleAndFragment(TYPE_WECHAT);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_WECHAT).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_WECHAT);
                         break;
                     case R.id.gank:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_GANK).getClass(), R.id.fram);
-
-//                        switchTitleAndFragment(TYPE_GANK);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_GANK).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_GANK);
                         break;
                     case R.id.gold:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_GOLD).getClass(), R.id.fram);
-
-//                        switchTitleAndFragment(TYPE_GOLD);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_GOLD).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_GOLD);
                         break;
                     case R.id.vtex:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_VTEX).getClass(), R.id.fram);
-
-//                        switchTitleAndFragment(TYPE_VTEX);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_VTEX).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_VTEX);
                         break;
                     case R.id.collect:
-
-//                        switchTitleAndFra888gment(TYPE_COLLECT);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_COLLECT).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_COLLECT);
                         break;
                     case R.id.setting:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_SETTING).getClass(), R.id.fram);
-
-//                        switchTitleAndFragment(TYPE_SETTING);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_SETTING).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_SETTING);
                         break;
                     case R.id.about:
-                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ABOUT).getClass(), R.id.fram);
-
-//                        switchTitleAndFragment(TYPE_ABOUT);
+//                        FragmentUtils.addFragment(mManager, mFragments.get(TYPE_ABOUT).getClass(), R.id.fram);
+                        switchTitleAndFragment(TYPE_ABOUT);
                         break;
                 }
                 draw.closeDrawer(Gravity.LEFT);
@@ -146,7 +145,22 @@ public class MainActivity extends BaseActivity {
 
         mLastType = type;
 
+        if (type == TYPE_WECHAT || type == TYPE_GANK) {
+            mItem.setVisible(true);
+        } else {
+            mItem.setVisible(false);
+        }
+
         too.setTitle(getResources().getString(mTitles.get(type)));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchview_item, menu);
+        mItem = menu.findItem(R.id.menu_searchview);
+        mItem.setVisible(false);
+        mSearchView.setMenuItem(mItem);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void initTitles() {

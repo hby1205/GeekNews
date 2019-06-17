@@ -10,6 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <FrameLayout
+            android:id="@+id/a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/too"
             android:layout_width="match_parent"
@@ -19,8 +24,17 @@
 
         </android.support.v7.widget.Toolbar>
 
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/searcgview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.miguelcatalan.materialsearchview.MaterialSearchView>
+        </FrameLayout>
+
         <FrameLayout
-            android:layout_below="@id/too"
+            android:layout_below="@id/a"
             android:id="@+id/fram"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
